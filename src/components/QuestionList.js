@@ -1,7 +1,7 @@
 import React from "react";
 import QuestionItem from "./QuestionItem";
 
-function QuestionList( {questions, handleDeleteQuestion} ) {
+function QuestionList( {questions, handleDeleteQuestion, handleUpdateQuestion} ) {
   
   if (questions === []) return <h3>Loading...</h3>
   return (
@@ -9,7 +9,7 @@ function QuestionList( {questions, handleDeleteQuestion} ) {
       <h1>Quiz Questions</h1>
       <ul>{
         /* display QuestionItem components here after fetching */
-        questions.map(question => {return < QuestionItem key={question.id} question={question} onDeleteQuestion={handleDeleteQuestion}/>})
+        questions.map(question => {return < QuestionItem key={question.id} question={question} onDeleteQuestion={handleDeleteQuestion} onUpdateQuestion={handleUpdateQuestion}/>})
         }</ul>
     </section>
   );

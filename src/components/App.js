@@ -19,17 +19,22 @@ function App() {
   }
 
   function handleDeletedQuestion(id) {
-    fetch(`http://localhost:4000/questions/${id}`, {
-      method: "DELETE",
-    })
-      .then((r) => r.json())
-      .then(() => setQuestions(questions.filter(question => question.id !== id)));
+    setQuestions(questions.filter(question => question.id !== id))
   }
+
+  function handleUpdatedQuestion(updatedQuestion) {
+    setQuestions(questions.map(question => {
+      if(question.id === updatedQuestion.id) {return updatedQuestion}
+      else {return question}
+    }))
+  }
+
+
 
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm onAddQuestion={handleAddQuestion}/> : <QuestionList questions={questions} handleDeleteQuestion={handleDeletedQuestion}/>}
+      {page === "Form" ? <QuestionForm onAddQuestion={handleAddQuestion}/> : <QuestionList questions={questions} handleDeleteQuestion={handleDeletedQuestion} handleUpdateQuestion={handleUpdatedQuestion}/>}
     </main>
   );
 }
